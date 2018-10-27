@@ -1,6 +1,7 @@
 // bower:scss
 // endbower
 $bgColor: #ddd;
+$pink: #ee6e73;
 
 body {
   background-color: $bgColor;
@@ -55,11 +56,16 @@ body {
 
     form {
       max-width: 80%;
-      margin: 3rem auto 0;
+      margin: 1rem auto 0;
 
       #submit-website-btn {
-        margin-top: -2rem;
+        margin-top: -1rem;
       }
     }
+
   }
+}
+
+a.card-category {
+  margin-top:1rem;
 }

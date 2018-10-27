@@ -14,7 +14,17 @@ M.AutoInit();
   const $createWesiteForm = document.querySelector("#create-website-form");
   const $websitesGrid = document.querySelector("#websites-grid");
   const $urlWebsite = document.querySelector("#url-website");
+  const $catWebsite = document.querySelector("#cat-website");
   const $submitWebsiteBtn = document.querySelector("#submit-website-btn");
+
+  document.querySelectorAll(".card.category").forEach(el => {
+    el.addEventListener("click", e => {
+      e.preventDefault();
+
+      // TODO: 
+      // fetch(/list?category= e.target.getAttribute("data-category").value)
+    });
+  });
 
   let isSendingWebsite = false;
 
@@ -24,7 +34,7 @@ M.AutoInit();
   ////
 
   // Card para pintar
-  const getCard = ({ title, url, description, image }) => `<div class="col s12 m6 l4">
+  const getCard = ({ title, url, description, image, cat }) => `<div class="col s12 m6 l4">
   <div class="card">
       <div class="card-image">
         <img src="${SERVER_URL}/${image}">
@@ -32,6 +42,9 @@ M.AutoInit();
       <div class="card-content">
         <span class="card-title black-text">${title}</span>
         <p>${description}</p>
+      <a class="card-category" data-category=${cat} href='/${cat}'>
+      <i class="teal-text tag-icon"># </i><span class="grey-text text-darken-2">${cat}</span>
+      </a>
       </div>
       <div class="card-action">
         <a href="${url}" class="blue-text" target="blank">Visitar website</a>
@@ -41,6 +54,7 @@ M.AutoInit();
 
   function clearCreationArea() {
     $urlWebsite.value = "";
+    $catWebsite.value = "";
 
     isSendingWebsite = false;
 
@@ -119,7 +133,10 @@ M.AutoInit();
         "Content-Type": "application/json"
       },
       mode: "cors",
-      body: JSON.stringify({ url: $urlWebsite.value })
+      body: JSON.stringify({ 
+        url: $urlWebsite.value,
+        cat: $catWebsite.value
+       })
     };
 
     // Envío + catch
